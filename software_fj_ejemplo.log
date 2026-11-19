@@ -1,0 +1,253 @@
+2026-11-19 03:20:16,756 INFO Inicio de la simulación con 25 casos
+2026-11-19 03:20:16,756 INFO Caso 01 | Cliente válido | Cliente C1 (Ana Ruiz)
+2026-11-19 03:20:16,756 INFO Caso 01 finalizado
+2026-11-19 03:20:16,756 ERROR Caso 02 | Correo inválido | El correo tiene un formato inválido.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 28, in <lambda>
+    lambda: cliente(Cliente("C2", "Luis Díaz", "incorrecto", "3001234567"))),
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 77, in __init__
+    self.__correo = self._validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "modelos.py", line 93, in _validar_correo
+    raise DatosInvalidos("El correo tiene un formato inválido.")
+modelos.DatosInvalidos: El correo tiene un formato inválido.
+2026-11-19 03:20:16,759 INFO Caso 02 finalizado
+2026-11-19 03:20:16,759 ERROR Caso 03 | Nombre vacío (parámetro faltante) | El nombre es obligatorio.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 30, in <lambda>
+    lambda: cliente(Cliente("C3", "   ", "vacio@example.com", "3001234567"))),
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 76, in __init__
+    self.__nombre = self._validar_nombre(nombre)
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "modelos.py", line 82, in _validar_nombre
+    nombre = texto(nombre, "El nombre")
+  File "modelos.py", line 37, in texto
+    raise ParametroFaltante(f"{campo} es obligatorio.")
+modelos.ParametroFaltante: El nombre es obligatorio.
+2026-11-19 03:20:16,760 INFO Caso 03 finalizado
+2026-11-19 03:20:16,760 ERROR Caso 04 | Nombre con números | El nombre solo puede contener letras y espacios.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 32, in <lambda>
+    lambda: cliente(Cliente("C4", "Pedro 123", "pedro@example.com", "3001234567"))),
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 76, in __init__
+    self.__nombre = self._validar_nombre(nombre)
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "modelos.py", line 86, in _validar_nombre
+    raise DatosInvalidos("El nombre solo puede contener letras y espacios.")
+modelos.DatosInvalidos: El nombre solo puede contener letras y espacios.
+2026-11-19 03:20:16,760 INFO Caso 04 finalizado
+2026-11-19 03:20:16,760 ERROR Caso 05 | Teléfono inválido | El teléfono debe tener 10 dígitos.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 34, in <lambda>
+    lambda: cliente(Cliente("C5", "Marta Gil", "marta@example.com", "12ab"))),
+                    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 78, in __init__
+    self.__telefono = self._validar_telefono(telefono)
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "modelos.py", line 100, in _validar_telefono
+    raise DatosInvalidos("El teléfono debe tener 10 dígitos.")
+modelos.DatosInvalidos: El teléfono debe tener 10 dígitos.
+2026-11-19 03:20:16,760 INFO Caso 05 finalizado
+2026-11-19 03:20:16,760 ERROR Caso 06 | Cliente duplicado | El código C1 ya está registrado.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 36, in <lambda>
+    lambda: cliente(Cliente("C1", "Ana Ruiz", "ana@example.com", "3001234567"))),
+            ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 42, in registrar_cliente
+    return self._registrar(self._clientes, cliente)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 37, in _registrar
+    raise OperacionInvalida(f"El código {entidad.codigo} ya está registrado.")
+modelos.OperacionInvalida: El código C1 ya está registrado.
+2026-11-19 03:20:16,761 INFO Caso 06 finalizado
+2026-11-19 03:20:16,761 INFO Caso 07 | Segundo cliente válido | Cliente C2 (Luis Díaz)
+2026-11-19 03:20:16,761 INFO Caso 07 finalizado
+2026-11-19 03:20:16,761 INFO Caso 08 | Sala válida | Sala S1
+2026-11-19 03:20:16,761 INFO Caso 08 finalizado
+2026-11-19 03:20:16,761 ERROR Caso 09 | Tarifa no numérica | La tarifa debe contener un número.
+Traceback (most recent call last):
+  File "modelos.py", line 44, in numero
+    resultado = Decimal(str(valor))
+decimal.InvalidOperation: [<class 'decimal.ConversionSyntax'>]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 40, in <lambda>
+    ("Tarifa no numérica", True, lambda: servicio(Sala("S2", "abc"))),
+                                                  ~~~~^^^^^^^^^^^^^
+  File "modelos.py", line 125, in __init__
+    self._tarifa = numero(tarifa, "La tarifa")
+                   ~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 46, in numero
+    raise DatosInvalidos(f"{campo} debe contener un número.") from causa
+modelos.DatosInvalidos: La tarifa debe contener un número.
+2026-11-19 03:20:16,761 INFO Caso 09 finalizado
+2026-11-19 03:20:16,761 ERROR Caso 10 | Tarifa negativa | La tarifa debe ser positiva.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 41, in <lambda>
+    ("Tarifa negativa", True, lambda: servicio(Asesoria("A9", -5000))),
+                                               ~~~~~~~~^^^^^^^^^^^^^
+  File "modelos.py", line 127, in __init__
+    raise DatosInvalidos("La tarifa debe ser positiva.")
+modelos.DatosInvalidos: La tarifa debe ser positiva.
+2026-11-19 03:20:16,762 INFO Caso 10 finalizado
+2026-11-19 03:20:16,762 INFO Caso 11 | Equipo válido | Alquiler de equipo E1
+2026-11-19 03:20:16,762 INFO Caso 11 finalizado
+2026-11-19 03:20:16,762 INFO Caso 12 | Asesoría válida | Asesoría A1
+2026-11-19 03:20:16,762 INFO Caso 12 finalizado
+2026-11-19 03:20:16,762 INFO Caso 13 | Registro de servicio inactivo | Alquiler de equipo E2
+2026-11-19 03:20:16,762 INFO Caso 13 finalizado
+2026-11-19 03:20:16,762 ERROR Caso 14 | Reserva de servicio inactivo | No se pudo confirmar la reserva R1: El servicio E2 no está disponible.
+Traceback (most recent call last):
+  File "gestion.py", line 56, in reservar
+    total = reserva.confirmar(impuesto, descuento)
+  File "modelos.py", line 270, in confirmar
+    total = self.procesar(impuesto, descuento)
+  File "modelos.py", line 263, in procesar
+    raise ServicioNoDisponible(
+        f"El servicio {self._servicio.codigo} no está disponible."
+    )
+modelos.ServicioNoDisponible: El servicio E2 no está disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 46, in <lambda>
+    ("Reserva de servicio inactivo", True, lambda: reservar("R1", "C1", "E2", 2)),
+                                                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 58, in reservar
+    raise OperacionInvalida(
+        f"No se pudo confirmar la reserva {codigo}: {causa}"
+    ) from causa
+modelos.OperacionInvalida: No se pudo confirmar la reserva R1: El servicio E2 no está disponible.
+2026-11-19 03:20:16,762 INFO Caso 14 finalizado
+2026-11-19 03:20:16,762 ERROR Caso 15 | Duración inválida | La duración exige horas enteras entre 2 y 24.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 47, in <lambda>
+    ("Duración inválida", True, lambda: reservar("R1", "C1", "E1", 1)),
+                                        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 54, in reservar
+    reserva = Reserva(codigo, cliente_registrado, servicio_registrado, horas)
+  File "modelos.py", line 240, in __init__
+    servicio.validar_duracion(horas)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "modelos.py", line 205, in validar_duracion
+    self.validar_rango(horas, 2, 24)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "modelos.py", line 178, in validar_rango
+    raise DatosInvalidos(
+        f"La duración exige horas enteras entre {minimo} y {maximo}."
+    )
+modelos.DatosInvalidos: La duración exige horas enteras entre 2 y 24.
+2026-11-19 03:20:16,763 INFO Caso 15 finalizado
+2026-11-19 03:20:16,763 ERROR Caso 16 | Servicio inexistente | El código X9 no está registrado.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 48, in <lambda>
+    ("Servicio inexistente", True, lambda: reservar("R1", "C1", "X9", 2)),
+                                           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 51, in reservar
+    servicio_registrado = self._buscar(self._servicios, servicio)
+  File "gestion.py", line 31, in _buscar
+    raise OperacionInvalida(f"El código {codigo} no está registrado.")
+modelos.OperacionInvalida: El código X9 no está registrado.
+2026-11-19 03:20:16,763 INFO Caso 16 finalizado
+2026-11-19 03:20:16,763 INFO Caso 17 | Reserva de sala (variante 1: solo horas) | Reserva R1 confirmada por COP 100,000.00
+2026-11-19 03:20:16,763 INFO Caso 17 finalizado
+2026-11-19 03:20:16,763 INFO Caso 18 | Reserva de equipo (variante 2: con IVA) | Reserva R2 confirmada por COP 136,850.00
+2026-11-19 03:20:16,763 INFO Caso 18 finalizado
+2026-11-19 03:20:16,763 ERROR Caso 19 | Descuento fuera de rango | No se pudo confirmar la reserva R3: El impuesto y el descuento deben estar entre 0 y 1.
+Traceback (most recent call last):
+  File "gestion.py", line 56, in reservar
+    total = reserva.confirmar(impuesto, descuento)
+  File "modelos.py", line 270, in confirmar
+    total = self.procesar(impuesto, descuento)
+  File "modelos.py", line 266, in procesar
+    return self._servicio.calcular_costo(self._horas, impuesto, descuento)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "modelos.py", line 164, in calcular_costo
+    raise DatosInvalidos("El impuesto y el descuento deben estar entre 0 y 1.")
+modelos.DatosInvalidos: El impuesto y el descuento deben estar entre 0 y 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 54, in <lambda>
+    lambda: reservar("R3", "C1", "A1", 2, IVA, Decimal("1.1"))),
+            ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 58, in reservar
+    raise OperacionInvalida(
+        f"No se pudo confirmar la reserva {codigo}: {causa}"
+    ) from causa
+modelos.OperacionInvalida: No se pudo confirmar la reserva R3: El impuesto y el descuento deben estar entre 0 y 1.
+2026-11-19 03:20:16,764 INFO Caso 19 finalizado
+2026-11-19 03:20:16,764 INFO Caso 20 | Reserva de asesoría (variante 3: IVA y descuento) | Reserva R3 confirmada por COP 173,502.00
+2026-11-19 03:20:16,764 INFO Caso 20 finalizado
+2026-11-19 03:20:16,764 ERROR Caso 21 | Reserva con código repetido | La reserva R3 ya existe.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 57, in <lambda>
+    ("Reserva con código repetido", True, lambda: reservar("R3", "C2", "S1", 1)),
+                                                  ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 53, in reservar
+    raise OperacionInvalida(f"La reserva {codigo} ya existe.")
+modelos.OperacionInvalida: La reserva R3 ya existe.
+2026-11-19 03:20:16,764 INFO Caso 21 finalizado
+2026-11-19 03:20:16,764 INFO Caso 22 | Cancelación válida | Reserva R1 cancelada
+2026-11-19 03:20:16,764 INFO Caso 22 finalizado
+2026-11-19 03:20:16,764 ERROR Caso 23 | Cancelación repetida | La reserva ya está cancelada.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 59, in <lambda>
+    ("Cancelación repetida", True, lambda: sistema.cancelar("R1")),
+                                           ~~~~~~~~~~~~~~~~^^^^^^
+  File "gestion.py", line 68, in cancelar
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "modelos.py", line 278, in cancelar
+    raise OperacionInvalida("La reserva ya está cancelada.")
+modelos.OperacionInvalida: La reserva ya está cancelada.
+2026-11-19 03:20:16,764 INFO Caso 23 finalizado
+2026-11-19 03:20:16,764 ERROR Caso 24 | Cliente inexistente | El código C9 no está registrado.
+Traceback (most recent call last):
+  File "main.py", line 73, in ejecutar
+    resultado = operacion()
+  File "main.py", line 60, in <lambda>
+    ("Cliente inexistente", True, lambda: reservar("R4", "C9", "S1", 1)),
+                                          ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "gestion.py", line 50, in reservar
+    cliente_registrado = self._buscar(self._clientes, cliente)
+  File "gestion.py", line 31, in _buscar
+    raise OperacionInvalida(f"El código {codigo} no está registrado.")
+modelos.OperacionInvalida: El código C9 no está registrado.
+2026-11-19 03:20:16,765 INFO Caso 24 finalizado
+2026-11-19 03:20:16,765 INFO Caso 25 | Reserva después de los errores | Reserva R4 confirmada por COP 50,000.00
+2026-11-19 03:20:16,765 INFO Caso 25 finalizado
+2026-11-19 03:20:16,765 INFO Fin de la simulación | Clientes: 2 | Servicios: 4 | Reservas: 4 (confirmadas: 3) | Desviaciones: 0
